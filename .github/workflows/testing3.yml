@@ -18,10 +18,7 @@ jobs:
         run: npm install 
       - name: Determine Version
         run: bash  ./.github/workflows/increment.sh 
-    env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          VERSION: ${{ steps.version.outputs.version }}
-          IS_PRERELEASE: ${{ steps.version.outputs.isPreRelease }} 
+   
       - name: Tag and Create Release
         run: |
             if [ "${{ env.IS_PRERELEASE }}" == "true" ]; then
