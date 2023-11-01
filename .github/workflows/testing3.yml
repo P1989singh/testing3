@@ -19,7 +19,22 @@ jobs:
       - name: Determine Version
         run: bash  ./.github/workflows/increment.sh 
     env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           VERSION: ${{ steps.version.outputs.version }}
-          IS_PRERELEASE: ${{ steps.version.outputs.isPreRelease }}
+          IS_PRERELEASE: ${{ steps.version.outputs.isPreRelease }} 
+      - name: Tag and Create Release
+        run: |
+            if [ "${{ env.IS_PRERELEASE }}" == "true" ]; then
+              # Create a pre-release tag
+              git tag -a "v${{ env.VERSION }}" -m "Pre-release v${{ env.VERSION }}"
+            else
+              # Create a release tag
+              git tag -a "v${{ env.VERSION }}" -m "Release v${{ env.VERSION }}"
+            fi
+  
+            # Push the tags to the repository
+            git push origin "v${{ env.VERSION }}"
+            # You can also create a GitHub release here
+    env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
 
