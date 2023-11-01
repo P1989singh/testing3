@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install dependencies
+      - name: Install dependencie
         run: npm install 
       - name: Determine Version
         run: bash  ./.github/workflows/increment.sh 
