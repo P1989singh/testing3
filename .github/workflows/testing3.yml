@@ -18,7 +18,7 @@ jobs:
         run: npm install 
       - name: Determine Version
         run: bash  ./.github/workflows/increment.sh 
-env:
+    env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ steps.version.outputs.version }}
           IS_PRERELEASE: ${{ steps.version.outputs.isPreRelease }}
