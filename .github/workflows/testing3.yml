@@ -15,4 +15,11 @@ jobs:
           node-version: 14
 
       - name: Install dependencies
-        run: npm install
+        run: npm install 
+      - name: Determine Version
+        run: bash  ./.github/workflows/increment.sh 
+env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+          IS_PRERELEASE: ${{ steps.version.outputs.isPreRelease }}
+
