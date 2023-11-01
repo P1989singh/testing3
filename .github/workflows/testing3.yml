@@ -17,8 +17,9 @@ jobs:
       - name: Install dependencie
         run: npm install 
       - name: Determine Version
+        id: increment1
         run: bash  ./.github/workflows/increment.sh 
-   
+        echo "${{steps.increment1.outputs.VERSION}}"      
       - name: Tag and Create Release
         run: |
             if [ "${{ env.IS_PRERELEASE }}" == "true" ]; then
