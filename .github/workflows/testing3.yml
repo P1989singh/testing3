@@ -23,14 +23,15 @@ jobs:
             echo "${{steps.increment1.outputs.VERSION}}"      
       - name: Tag and Create Release
         run: |
-            if [ "${{ env.IS_PRERELEASE }}" == "true" ]; then
+            if [ "${{ env.IS_PRERELEASE }}" == "false" ]; then
               # Create a pre-release tag
               git tag -a "v${{ env.VERSION }}" -m "Pre-release v${{ env.VERSION }}"
             else
               # Create a release tag
               git tag -a "v${{ env.VERSION }}" -m "Release v${{ env.VERSION }}"
             fi
-  
+            git config user.name "P1989singh"
+            git config user.email "prmkmrsingh@yahoo.in"  
             # Push the tags to the repository
             git push origin "v${{ env.VERSION }}"
             # You can also create a GitHub release here
