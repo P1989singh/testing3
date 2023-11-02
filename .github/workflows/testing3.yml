@@ -22,8 +22,8 @@ jobs:
             bash  ./.github/workflows/increment.sh 
             env:
               GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-              VERSION: ${{ steps.version.outputs.version }}
-              IS_PRERELEASE: ${{ steps.version.outputs.isPreRelease }}     
+              VERSION: ${{ steps.version.outputs.VERSION }}
+              IS_PRERELEASE: ${{ steps.version.outputs.IS_PRERELEASE }}     
       - name: Tag and Create Release
         run: |
             if [ "${{ env.IS_PRERELEASE }}" == "true" ]; then
