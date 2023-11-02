@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Initialize version and isPreRelease variables
-VERSION="1.0.0"
-IS_PRERELEASE="false"
+VERSION=${{VERSION}}
+IS_PRERELEASE=${{isPreRelease}}
 
 # Get the latest commit message
 latest_commit_message=$(git log -1 --pretty=%s)
