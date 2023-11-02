@@ -20,10 +20,13 @@ jobs:
         id: increment1
         run: | 
             bash  ./.github/workflows/increment.sh 
-            echo "${{steps.increment1.outputs.VERSION}}"      
+            env:
+              GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+              VERSION: ${{ steps.version.outputs.version }}
+              IS_PRERELEASE: ${{ steps.version.outputs.isPreRelease }}     
       - name: Tag and Create Release
         run: |
-            if [ "${{ env.IS_PRERELEASE }}" == "false" ]; then
+            if [ "${{ env.IS_PRERELEASE }}" == "true" ]; then
               # Create a pre-release tag
               git tag -a "v${{ env.VERSION }}" -m "Pre-release v${{ env.VERSION }}"
             else
@@ -36,5 +39,5 @@ jobs:
             git push origin "v${{ env.VERSION }}"
             # You can also create a GitHub release here
     env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}    
 
